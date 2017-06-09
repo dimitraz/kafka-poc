@@ -1,0 +1,13 @@
+.idea/
+*.iml
+*.iws
+
+.classpath
+.project
+.settings/
+
+.DS_Store
+
+# Maven
+log/
+target/
