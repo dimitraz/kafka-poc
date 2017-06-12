@@ -7,25 +7,16 @@ Make sure to modify `bootsrap.servers` in the `consumer.props` and `producer.pro
 First run the Zookeeper container:
 
 ```
-docker run -d --name zookeeper --network kafka-net zookeeper:3.4
-```
-
-Then start the container for the Kafka broker, on port 9092:
-
-```
-docker run -d --name kafka --network kafka-net -p 9092:9092 --env ZOOKEEPER_IP=zookeeper ches/kafka
+$ docker run -d --name zookeeper --network kafka-net zookeeper:3.4
+$ docker run -d --name kafka --network kafka-net -p 9092:9092 --env ZOOKEEPER_IP=zookeeper ches/kafka
 ```
 
 ### Mac
 Establishing a connection between a container and a host service with Docker for Mac is slightly more convoluted. To get going, first run the Zookeeper container:
 
 ```
-docker run -d --name zookeeper --network kafka-net zookeeper:3.4
-```
-Start the container for the Kafka broker, making sure to publish port 9092: 
-
-```
-docker run -d --name kafka --network kafka-net -p 9092:9092 --env ZOOKEEPER_IP=zookeeper ches/kafka
+$ docker run -d --name zookeeper --network kafka-net zookeeper:3.4
+$ docker run -d --name kafka --network kafka-net -p 9092:9092 --env ZOOKEEPER_IP=zookeeper ches/kafka
 ```
 
 Get the container's IP address:
@@ -36,7 +27,7 @@ $ echo $CONTAINER_IP
 ```
 Add this IP to the `loopback 0` interface: 
 ```
-sudo ifconfig lo0 alias $CONTAINER_IP
+$ sudo ifconfig lo0 alias $CONTAINER_IP
 ```
 
 And finally connect to the broker using this address by updating the `bootstrap.servers` in the the `consumer.props` and `producer.props`.
@@ -53,13 +44,13 @@ ______
 The Java application should create the topic `taytochips`, or whatever topics you choose to replace that with. To confirm:
 
 ```
-docker run --rm --network kafka-net ches/kafka kafka-topics.sh --list --zookeeper zookeeper:2181
+$ docker run --rm --network kafka-net ches/kafka kafka-topics.sh --list --zookeeper zookeeper:2181
 ```
 
 Start a consumer from within the container to verify if the messages from the producer are coming through:
 
 ```
-docker run --rm --network kafka-net ches/kafka kafka-console-consumer.sh --topic taytochips --from-beginning --bootstrap-server kafka:9092
+$ docker run --rm --network kafka-net ches/kafka kafka-console-consumer.sh --topic taytochips --from-beginning --bootstrap-server kafka:9092
 ```
 
 ## To Do
