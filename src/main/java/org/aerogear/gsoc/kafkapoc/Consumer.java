@@ -41,7 +41,7 @@ public class Consumer {
         }
 
         // Subscribe to topics and start consuming
-        consumer.subscribe(Arrays.asList("taytochips"));
+        consumer.subscribe(Arrays.asList(topic));
 
         try {
             while (true) {

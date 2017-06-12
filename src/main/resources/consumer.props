@@ -1,4 +1,4 @@
-bootstrap.servers=0.0.0.0:9092
+bootstrap.servers=172.19.0.3:9092
 enable.auto.commit=true
 auto.commit.interval.ms=1000
 session.timeout.ms=30000
