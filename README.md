@@ -4,15 +4,16 @@ Make sure to modify `bootsrap.servers` in the `consumer.props` and `producer.pro
 
 ## Getting started with Docker
 ### Linux
-First run the Zookeeper container:
+Getting started with Linux is a fairly straightforward process:
 
 ```
 $ docker run -d --name zookeeper --network kafka-net zookeeper:3.4
 $ docker run -d --name kafka --network kafka-net -p 9092:9092 --env ZOOKEEPER_IP=zookeeper ches/kafka
 ```
+Connect to the Kafka broker by updating your `bootstrap.servers` with `localhost:9092` or the IP of the Kafka container.
 
 ### Mac
-Establishing a connection between a container and a host service with Docker for Mac is slightly more convoluted. To get going, first run the Zookeeper container:
+Establishing a connection between a container and a host service with Docker for Mac is slightly more convoluted. To get going, first run both the Zookeeper and Kafka conrainers normally:
 
 ```
 $ docker run -d --name zookeeper --network kafka-net zookeeper:3.4
@@ -34,10 +35,14 @@ And finally connect to the broker using this address by updating the `bootstrap.
 
 ______ 
 
-**Note**: If you prefer to use your host's IP address (`ifconfig en0 | grep "inet " | cut -d " " -f2`):
-1. Replace `zookeeper` in the `ZOOKEEPER_IP` env var with your own IP address.
-2. Add the env variable `--env KAFKA_ADVERTISED_HOST_NAME=<your_host_ip>` to the second docker run statement
-3. Connect to the Kafka broker by using your host ip (update the `bootstrap.servers` accordingly)
+**Note**: If you prefer to use your host's IP address, run the following:
+
+```
+$ HOST_IP=$(ifconfig en0 | grep "inet " | cut -d " " -f2)
+$ docker run -d --name zookeeper --network kafka-net zookeeper:3.4
+$ docker run -d --name kafka --network kafka-net -p 9092:9092 --env ZOOKEEPER_IP=$HOST_IP --env KAFKA_ADVERTISED_HOST_NAME=$HOST_IP ches/kafka
+```
+Connect to the Kafka broker using your host IP by updating the `bootstrap.servers` accordingly.
 
 ## Running the Producer
 
