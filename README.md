@@ -1,6 +1,6 @@
 # Apache Kafka 
 Simple Kafka Consumer and Producer for testing purposes.
-Make sure to modify `bootsrap.servers` in the `consumer.props` and `producer.props` with the location of your server(s) if they are different. 
+Make sure to modify `bootstrap.servers` in the `consumer.props` and `producer.props` with the location of your server(s) if they are different. 
 
 ## Getting started with Docker
 ### Linux
@@ -13,7 +13,7 @@ $ docker run -d --name kafka --network kafka-net -p 9092:9092 --env ZOOKEEPER_IP
 Connect to the Kafka broker by updating your `bootstrap.servers` with `localhost:9092` or the IP of the Kafka container.
 
 ### Mac
-Establishing a connection between a container and a host service with Docker for Mac is slightly more convoluted. To get going, first run both the Zookeeper and Kafka conrainers normally:
+Establishing a connection between a container and a host service with Docker for Mac is slightly more convoluted. To get going, first run both the Zookeeper and Kafka containers normally:
 
 ```
 $ docker run -d --name zookeeper --network kafka-net zookeeper:3.4
