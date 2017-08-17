@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import java.util.Random;
+import java.util.logging.Logger;
 
 /**
  * Simple Kafka Producer class to send messages to a given
@@ -18,6 +19,8 @@ import java.util.Random;
  *  @author Dimitra Zuccarelli
  */
 public class Producer {
+
+    private final Logger logger = Logger.getLogger(Producer.class.getName());
 
     // Random tweets from a tweetbot lol
     final private String [] tweets = {"I wrote again to turn to account", "We must be completely clouded over in the best", "And set up. As things are.", "At first he talks of his brother Fyodor.", "\" The Idiot \" the incarnation of avarice.", "Whenever we think of you.", "But they're frightfully limited!", "All the rest of the 0.", "But in the course of your state of health", "But if the creditors.", "I owe to these gentry know very precisely how much you will permit me", "And expressed their surprise at my expense \"!", "I hope that I forgot my exalted position as a revelation", "Suppose it really succeeds."};
@@ -43,7 +46,7 @@ public class Producer {
             properties.put("value.serializer.type", Tweet.class.getName());
             properties.load(props);
 
-            System.out.println("Attempting to connect to bootstrap server: " + properties.getProperty("bootstrap.servers"));
+            logger.info("Attempting to connect to bootstrap server: " + properties.getProperty("bootstrap.servers"));
             producer = new KafkaProducer<>(properties);
         }
 
@@ -52,6 +55,7 @@ public class Producer {
             for (int i = 0; i < 20; i++) {
                 Tweet tweet = new Tweet(Integer.toString(i), tweets[random.nextInt(tweets.length)], "en");
                 producer.send(new ProducerRecord<String, Tweet>(topic, Integer.toString(i), tweet));
+
                 System.out.println(i + " " + tweet);
             }
         } catch (Exception e) {

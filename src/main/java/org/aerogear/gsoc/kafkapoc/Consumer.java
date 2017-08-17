@@ -3,7 +3,6 @@ import com.google.common.io.Resources;
 
 import org.aerogear.gsoc.kafkapoc.model.Tweet;
 import org.aerogear.gsoc.kafkapoc.util.GenericDeserializer;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.Serdes;
