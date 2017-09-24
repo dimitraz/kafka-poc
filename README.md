@@ -58,5 +58,5 @@ Start a consumer from within the container to verify if the messages from the pr
 $ docker run --rm --network kafka-net ches/kafka kafka-console-consumer.sh --topic taytochips --from-beginning --bootstrap-server kafka:9092
 ```
 
-## To Do
-- Getting started with Openshift
+## Getting started with Openshift
+For instructions on running Kafka on Openshift, see [here](https://github.com/aerogear/aerogear-unifiedpush-server/tree/GSOC_2017_kafka/kafka#getting-started-with-openshift).
